@@ -1,5 +1,20 @@
 #include <stdlib.h>
 #include <SoftwareSerial.h>
+#include <FirebaseArduino.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WebServer.h> 
+
+#ifndef STASSID
+#define STASSID "honor_9i"
+#define STAPSK  "coolline"
+#define FIREBASE_HOST "h2opointer.firebaseio.com"
+#define FIREBASE_AUTH "mayzzGPa38qyD2gGcO1qzAlakK7bzM1VrtuSmszh"
+#endif
+
+
+const char *ssid = STASSID;
+const char *password = STAPSK;
+
 SoftwareSerial nodemcu(2,3);
  
 #define SensorPin A0          //pH meter Analog output to Arduino Analog Input 0
@@ -18,6 +33,23 @@ void setup()
 {
   pinMode(13,OUTPUT);  
   Serial.begin(9600);  
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.println("");
+
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
   //nodemcu.begin(9600); 
 }
 void loop()
@@ -49,6 +81,11 @@ void loop()
    valueString = valueString + Value +","; 
    Serial.println("9" + valueString);
    //nodemcu.println(valueString);
+   Firebase.setInt("Ph",phValue);
+
+  if (Firebase.failed()) { 
+     Serial.print("setting /number failed:");    
+}
   valueString = "";
  delay(3000);
  
