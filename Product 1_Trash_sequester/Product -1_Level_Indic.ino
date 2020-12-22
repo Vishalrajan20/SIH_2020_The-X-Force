@@ -8,7 +8,7 @@
 #define STASSID "honor_9i"
 #define STAPSK  "coolline"
 #define FIREBASE_HOST "leveltest.firebaseio.com"
-#define FIREBASE_AUTH "hw1oGy9KbgH0Fe8B3Qv3B9oPKXkgMUrNMw2EqLJN"
+#define FIREBASE_AUTH "hw1oGy9KbgH0Fe8B3Qv3B9oPKXkgMUrN"
 #endif
 
 long duration1, distance1;
