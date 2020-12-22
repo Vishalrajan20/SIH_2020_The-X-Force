@@ -8,7 +8,7 @@
 #define STASSID "honor_9i"
 #define STAPSK  "coolline"
 #define FIREBASE_HOST "astuteppm.firebaseio.com"
-#define FIREBASE_AUTH "mayzzGPa38qyD2gGcO1qzAlakK7bzM1VrtuSmszh"
+#define FIREBASE_AUTH "mayzzGPa38qyD2gGcO1qzAlakK7mszh"
 #endif
 
 
